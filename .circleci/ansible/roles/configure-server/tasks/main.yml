@@ -1,10 +1,21 @@
-- name: "install NodeJs"
+- name: "Add NodeJs"
   become: true
+  # shell: |
+  #   curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+  #   sudo apt-get install -y nodejs
+  
   shell: |
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | sudo -E bash -
     source ~/.profile
     nvm install 13.9.0
     nvm use 13.9.0
+
+- name: "Install nodeJs 13"
+  become: true
+  apt:
+    name: ["nodejs"]
+    state: latest
+    update_cache: yes
 
 - name: "Install PM2 globally"
   npm:
