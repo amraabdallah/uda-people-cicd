@@ -27,10 +27,10 @@ commands:
       - run:
           name: Install Nodejs 13.9.0
           command: |
-            curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n
-            bash n lts
-            npm install -g n
-            n 13.9.0
+            sudo curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n
+            sudo bash n lts
+            sudo npm install -g n
+            sudo n 13.9.0
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
