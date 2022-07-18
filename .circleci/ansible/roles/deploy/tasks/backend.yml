@@ -10,6 +10,7 @@
 
 - name: "Install NPM Deps"
   shell: |
+    cp package* ..
     cd ~/backend-app
     npm i
 
