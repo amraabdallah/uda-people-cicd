@@ -8,12 +8,36 @@
     src: artifact.tar.gz
     dest: ~/backend-app
 
+
+- name: "Configure the environment variables"
+  shell: |
+    cd ~/backend
+    touch .ven
+    NODE_ENV=production >> .ven
+    VERSION=1 >> .ven
+    TYPEORM_CONNECTION=postgres >> .ven
+    TYPEORM_MIGRATIONS_DIR=./migrations >> .ven
+    TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> .ven
+    TYPEORM_MIGRATIONS=./src/migrations/*{.ts,.js} >> .ven
+
+    export TYPEORM_HOST=$TYPEORM_HOST
+    export TYPEORM_PORT=$TYPEORM_PORT
+    export TYPEORM_USERNAME=$TYPEORM_USERNAME
+    export TYPEORM_PASSWORD=$TYPEORM_PASSWORD
+    export TYPEORM_DATABASE=$TYPEORM_DATABASE
+
+
+- name: "Install global dependencies"
+  shell: |
+    npm i -g @nestjs/cli
+    npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
+    npm i @nestjs/swagger
+
 - name: "Install NPM Deps"
   shell: |
     cp package.json ..
     cp package-lock.json ..
     cd ~/backend-app
-    npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
     npm i
 
 - name: "Run node app with PM2"
