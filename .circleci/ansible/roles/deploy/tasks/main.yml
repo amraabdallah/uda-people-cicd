@@ -10,8 +10,10 @@
 
 - name: "Install NPM Deps"
   shell: |
-    cp package* ..
+    cp package.json ..
+    cp package-lock.json ..
     cd ~/backend-app
+    npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
     npm i
 
 - name: "Run node app with PM2"
