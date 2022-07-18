@@ -11,14 +11,12 @@
 
 - name: "Configure the environment variables"
   shell: |
-    cd ~/backend
-    touch .ven
-    NODE_ENV=production >> .ven
-    VERSION=1 >> .ven
-    TYPEORM_CONNECTION=postgres >> .ven
-    TYPEORM_MIGRATIONS_DIR=./migrations >> .ven
-    TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js} >> .ven
-    TYPEORM_MIGRATIONS=./src/migrations/*{.ts,.js} >> .ven
+    export NODE_ENV=production
+    export VERSION=1
+    export TYPEORM_CONNECTION=postgres
+    export TYPEORM_MIGRATIONS_DIR=./migrations
+    export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+    export TYPEORM_MIGRATIONS=./src/migrations/*{.ts,.js}
 
     export TYPEORM_HOST=$TYPEORM_HOST
     export TYPEORM_PORT=$TYPEORM_PORT
@@ -29,9 +27,13 @@
 
 - name: "Install global dependencies"
   shell: |
+    cd ~/backend-app
     npm i -g @nestjs/cli
-    npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
-    npm i @nestjs/swagger
+    npm i -g reflect-metadata
+    npm i -g rxjs
+    npm i -g @nestjs/common
+    npm i -g @nestjs/core
+    npm i -g @nestjs/swagger
 
 - name: "Install NPM Deps"
   shell: |
