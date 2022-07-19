@@ -49,7 +49,7 @@
     pm2 start main.js
 
   register: execute_node
----
+  
 - name: "Creates backend app directory"
   file:
     path: ~/backend-app
