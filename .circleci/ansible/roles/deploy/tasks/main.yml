@@ -26,26 +26,25 @@
     echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> ~/backend-app/.env
     echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> ~/backend-app/.env
     echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> ~/backend-app/.env
+    cp ~/backend-app/.env ~/backend-app/dist/.env
+
+- name: "Install NPM Deps"
+  shell: |
+    cp package-lock.json ..
+    cp package.json ..
+    cd ~/backend-app
+    npm i
 
 - name: "Install global dependencies"
   shell: |
-    cd ~/backend-app
+    cd ~/backend-app/dist
     npm i -g @nestjs/cli
     npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
     npm i --save @nestjs/swagger
 
-- name: "Install NPM Deps"
-  shell: |
-    cp package.json ..
-    cp package-lock.json ..
-    cd ~/backend-app
-    npm i
-
 - name: "Run node app with PM2"
   shell: |
     cd ~/backend-app/dist
-    sleep 20
-    npm i
     pm2 stop default
     pm2 start main.js
 
