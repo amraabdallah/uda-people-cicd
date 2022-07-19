@@ -5,14 +5,9 @@
 - name: "Install NPM Deps"
   shell: |
     cd ~/backend-app/dist
-    npm i
-
-- name: "Install global dependencies"
-  shell: |
-    cd ~/backend-app/dist
+    npm install
     npm i -g @nestjs/cli
     npm i --save @nestjs/core @nestjs/common rxjs reflect-metadata
-    #npm i --save @nestjs/swagger
 
 - name: "Install global dependencies"
   shell: |
