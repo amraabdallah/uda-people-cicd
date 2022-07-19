@@ -12,7 +12,7 @@
   file:
     path: "~/backend-app/.env"
     state: touch
-    
+
 - name: Append env file content
   shell: |
     echo NODE_ENV=$NODE_ENV >> ~/backend-app/.env
@@ -44,6 +44,8 @@
 - name: "Run node app with PM2"
   shell: |
     cd ~/backend-app/dist
+    sleep 20
+    npm i
     pm2 stop default
     pm2 start main.js
 
