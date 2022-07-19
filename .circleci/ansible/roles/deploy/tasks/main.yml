@@ -8,6 +8,25 @@
     src: artifact.tar.gz
     dest: ~/backend-app
 
+- name: "create .env"
+  file:
+    path: "~/backend-app/.env"
+    state: touch
+    
+- name: Append env file content
+  shell: |
+    echo NODE_ENV=$NODE_ENV >> ~/backend-app/.env
+    echo VERSION=$VERSION >> ~/backend-app/.env
+    echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION >> ~/backend-app/.env
+    echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> ~/backend-app/.env
+    echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES >> ~/backend-app/.env
+    echo TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS >> ~/backend-app/.env
+    echo TYPEORM_HOST=$TYPEORM_HOST >> ~/backend-app/.env
+    echo TYPEORM_PORT=$TYPEORM_PORT >> ~/backend-app/.env
+    echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> ~/backend-app/.env
+    echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> ~/backend-app/.env
+    echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> ~/backend-app/.env
+
 - name: "Install global dependencies"
   shell: |
     cd ~/backend-app
